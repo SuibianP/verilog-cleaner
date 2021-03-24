@@ -1,0 +1,25 @@
+runner:
+    verilator:
+        cmd: 'docker run -i -v ${PWD}:/work --user $(id -u):$(id -g) verilator/verilator:latest --lint-only -Wall -Wpedantic $(find -L . -name *.v) 2>&1 | cat'
+        # not using the convenience script since not a TTY
+        # cat is for exit status
+        errorformat:
+            - '%E%%%trror: %f:%l: %m'
+            - '%W%%%tarning-%.%#: %f:%l:%c: %m'
+            - '%C%.%#'
+            - '%C%p^~%#%Z'
+            - '%+G%.%#'
+
+    verible-lint:
+        cmd: 'verible-verilog-lint $(find -L . -type f -name *.v) | cat'
+        errorformat:
+            - '%f:%l:%c: %m'
+
+    verible-syntax:
+        cmd: 'verible-verilog-syntax $(find -L . -type f -name *.v)'
+        errorformat:
+            - '%f:%l:%c: %m'
+
+    verible-format:
+        cmd: 'verible-verilog-format --inplace $(find -L . -type f -name *.v) && git diff'
+        format: 'diff'

@@ -1,0 +1,27 @@
+name: Verilog Cleaner
+author: Hu Jialun
+description: Lint and format Verilog code
+inputs:
+  github_token:
+    required: true
+  workdir:
+    required: false
+    default: .
+  reporter:
+    required: false
+    default: github-check
+runs:
+  using: composite
+  steps:
+    - run: '[ ${{ runner.os }} = "Linux" ] || echo "::warning::{This action only supports currently Linux runners.}"'
+      shell: bash
+    - run: ${{ github.action_path }}/entrypoint.sh
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
+        INPUT_WORKDIR: ${{ inputs.workdir }}
+        INPUT_REPORTER: ${{ inputs.reporter }}
+branding:
+  icon: user-check
+  color: green
