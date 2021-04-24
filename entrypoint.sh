@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #    verilog-cleaner, a shell script to lint and format Verilog code.
-#    Copyright (C) 2020  Hu Jialun (SuibianP)
+#    Copyright (C) 2021  Hu Jialun (SuibianP)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
